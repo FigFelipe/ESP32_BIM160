@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace ESP32_BIM160.Views
 {
     /// <summary>
@@ -23,6 +24,7 @@ namespace ESP32_BIM160.Views
         public ESP32CodeUserControl()
         {
             InitializeComponent();
+            
         }
     }
 }

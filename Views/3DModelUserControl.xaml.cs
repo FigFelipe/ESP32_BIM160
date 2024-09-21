@@ -1,4 +1,5 @@
 ﻿using HelixToolkit.Wpf;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -26,6 +27,8 @@ namespace ESP32_BIM160.Views
         public _3DModelUserControl()
         {
             InitializeComponent();
+
+            
 
             // Faz a importação e exibição do modelo 3D
             ExibeModelo3D();
@@ -76,9 +79,15 @@ namespace ESP32_BIM160.Views
             {
                 // Handle exception in case can not file 3D model
                 MessageBox.Show("Ocorreu um erro na importação do objeto 3D: " + e.StackTrace);
+
+                // Sends a message notification
+                showSnackBarMessage(3, "Theres something wrong with the 3D object loading!");
             }
 
             Debug.WriteLine("--> O modelo 3D foi importado corretamente.");
+
+            // Exibe a mensagem de carregando objeto 3D por 5 segundos
+            showSnackBarMessage(3, "The 3D object was successfully loaded.");
 
             return device;
         }
@@ -94,6 +103,18 @@ namespace ESP32_BIM160.Views
             rotation.Children.Add(translation);
 
             viewPort3d.Camera.Transform = rotation;
+        }
+
+        private void showSnackBarMessage(int duration, string messageContent)
+        {
+            SnackbarSeven.MessageQueue?.Enqueue(
+                $"{messageContent}",
+                null,
+                null,
+                null,
+                false,
+                true,
+                TimeSpan.FromSeconds(duration));
         }
     }
 }

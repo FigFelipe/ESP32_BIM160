@@ -6,10 +6,12 @@
              xmlns:helix="http://helix-toolkit.org/wpf"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
              xmlns:local="clr-namespace:ESP32_BIM160.Views"
              mc:Ignorable="d"
              d:DesignHeight="352"
              d:DesignWidth="600">
+
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -32,7 +34,8 @@
 
                 <!--Code Explanation-->
                 <Grid>
-
+                    <wv2:WebView2 Name="webView"
+                                  Source="https://github.com/FigFelipe/ESP32_BIM160/blob/main/README.md" />
                 </Grid>
 
             </materialDesign:Card>

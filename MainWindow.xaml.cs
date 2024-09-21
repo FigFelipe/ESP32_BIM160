@@ -48,11 +48,8 @@ namespace RotationCubeExample
         {
             InitializeComponent();
 
-            // Obter as portas COM disponíveis
-            //string[] portas = SerialPort.GetPortNames();
-
-            // Exibindo as portas COM disponíveis no 'comboBoxPortaCOM'
-            //comboBoxPortaCOM.ItemsSource = portas;
+            // Aguarda o carregamento completo
+            this.Loaded += MainWindow_Loaded;
 
             // Realiza a tentativa de conexão com o ESP32
             //esp32.Conectar(conexaoSerial);
@@ -62,11 +59,6 @@ namespace RotationCubeExample
 
             // Conexão com o ESP32
             //esp32.SerialConnection();
-
-            // Faz a chamada da primeira UserControl
-            gridModelo3D.Children.Clear();
-            gridModelo3D.Children.Add(new _3DModelUserControl());
-
 
             var rawData = new RawData();
 
@@ -78,10 +70,12 @@ namespace RotationCubeExample
 
         }
 
-        
-
-        // Sliders X, Y e Z
-
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Faz a chamada da primeira UserControl
+            gridModelo3D.Children.Clear();
+            gridModelo3D.Children.Add(new _3DModelUserControl());
+        }
 
         // Permite clicar e mover a janela (grid) principal
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
