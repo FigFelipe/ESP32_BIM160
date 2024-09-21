@@ -19,6 +19,7 @@
     </Window.DataContext>
     <Window.Resources>
         <ResourceDictionary>
+            <local:MillisecondsConverter x:Key="MillisecondsConverter" />
             <ResourceDictionary.MergedDictionaries>
                 <materialDesign:BundledTheme BaseTheme="Light"
                                              PrimaryColor="DeepPurple"
@@ -260,7 +261,7 @@
                         Height="36"
                         Width="154" />
 
-                <Label Content="BOSCH BMI160"
+                <Label Content="Bosch BMI160"
                        HorizontalAlignment="Left"
                        FontSize="14"
                        FontFamily="Helvetica"
@@ -441,6 +442,73 @@
                                Width="19" />
 
                 </Grid>
+
+                <!--Sampling Rate-->
+                <Label Content="Pooling Rate (ms)"
+                       HorizontalAlignment="Left"
+                       FontSize="14"
+                       FontFamily="Helvetica"
+                       FontWeight="SemiBold"
+                       Margin="25,258,0,0"
+                       VerticalAlignment="Top"
+                       Height="24" />
+
+                <materialDesign:PackIcon Kind="Poll"
+                                         Margin="5,259,0,0"
+                                         Height="18"
+                                         Width="18"
+                                         Foreground="Purple" />
+
+                <Separator Margin="6,276,5,0"
+                           VerticalAlignment="Top"
+                           Height="11" />
+
+                <Label Content="{Binding Value, ElementName=sliderPollingRate, Converter={StaticResource MillisecondsConverter}}"
+                       HorizontalAlignment="Left"
+                       FontSize="14"
+                       FontFamily="Helvetica"
+                       FontWeight="Light"
+                       Margin="2,292,0,0"
+                       VerticalAlignment="Top"
+                       Height="24" />
+
+                <Slider x:Name="sliderPollingRate"
+                        Maximum="1000"
+                        Minimum="50"
+                        Style="{StaticResource MaterialDesignDiscreteSlider}"
+                        TickFrequency="100"
+                        TickPlacement="BottomRight"
+                        Value="40"
+                        Margin="65,292,6,69" />
+
+
+                <!--Export CSV-->
+                <Label Content="Export to .CSV"
+                       HorizontalAlignment="Left"
+                       FontSize="14"
+                       FontFamily="Helvetica"
+                       FontWeight="SemiBold"
+                       Margin="25,328,0,0"
+                       VerticalAlignment="Top"
+                       Height="24" />
+
+                <materialDesign:PackIcon Kind="Export"
+                                         Margin="5,329,0,0"
+                                         Height="18"
+                                         Width="18"
+                                         Foreground="Purple" />
+
+                <Separator Margin="6,346,5,0"
+                           VerticalAlignment="Top"
+                           Height="11" />
+
+                <Button Content="Export"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                        Style="{StaticResource MaterialDesignOutlinedButton}"
+                        ToolTip="Export axis sensor data to .csv file format"
+                        Margin="14,360,18,3" />
+
+
             </Grid>
         </materialDesign:Card>
 

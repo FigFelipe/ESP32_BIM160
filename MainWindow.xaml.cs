@@ -25,6 +25,7 @@ using ESP32_BIM160.Charts;
 using LiveCharts.Wpf;
 using LiveCharts.Wpf.Charts.Base;
 using ESP32_BIM160.Views;
+using System.Globalization;
 
 
 namespace RotationCubeExample
@@ -43,6 +44,9 @@ namespace RotationCubeExample
         // Instancia uma nova conexão Serial com o ESP32
         SharerConnection conexaoSerial = new SharerConnection("COM3", 115200);
 
+        // Instancia um novo objeto 'dispatcherTimer'
+        private DispatcherTimer dispatcherTimer;
+
 
         public MainWindow()
         {
@@ -50,6 +54,8 @@ namespace RotationCubeExample
 
             // Aguarda o carregamento completo
             this.Loaded += MainWindow_Loaded;
+
+
 
             // Realiza a tentativa de conexão com o ESP32
             //esp32.Conectar(conexaoSerial);
@@ -75,6 +81,8 @@ namespace RotationCubeExample
             // Faz a chamada da primeira UserControl
             gridModelo3D.Children.Clear();
             gridModelo3D.Children.Add(new _3DModelUserControl());
+
+            InitializeDispatcherTimer();
         }
 
         // Permite clicar e mover a janela (grid) principal
@@ -158,6 +166,34 @@ namespace RotationCubeExample
 
             gridAuxiliar.Children.Clear();
             gridAuxiliar.Children.Add(new AboutUserControl());
+        }
+
+        // Dispatcher Timer
+        private void InitializeDispatcherTimer()
+        {
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Interval = TimeSpan.FromMilliseconds(1000); // Set the interval to 1000ms
+            dispatcherTimer.Tick += DispatcherTimer_Tick; // Subscribe to the Tick event
+            dispatcherTimer.Start(); // Start the timer
+        }
+
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            // Code to execute every 1000ms
+            Debug.WriteLine("Dispatcher Timer Tick: " + DateTime.Now);
+        }
+    }
+
+    public class MillisecondsConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return $"{value} ms";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }
