@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="ESP32_BIM160.Views._3DModelUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:helix="http://helix-toolkit.org/wpf"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+             xmlns:local="clr-namespace:ESP32_BIM160.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="340" d:DesignWidth="590">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <materialDesign:BundledTheme BaseTheme="Light"
+                                             PrimaryColor="DeepPurple"
+                                             SecondaryColor="DeepPurple" />
+
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <Grid>
+        <materialDesign:TransitioningContent x:Name="TransitioningContentSlide1"
+                                             OpeningEffect="{materialDesign:TransitionEffect Kind=FadeIn, Duration=0:0:0.8}">
+
+            <materialDesign:Card UniformCornerRadius="3"
+                                 Visibility="Visible">
+
+                <!--HelixViewPort-->
+                <Grid>
+                    <helix:HelixViewport3D x:Name="viewPort3d"
+                                           ZoomExtentsWhenLoaded="true"
+                                           ShowCoordinateSystem="True"
+                                           ShowViewCube="False"
+                                           ShowFrameRate="True"
+                                           ShowCameraInfo="False"
+                                           Margin="0,0,0,121">
+
+                        <!-- Remember to add light to the scene -->
+                        <helix:DefaultLights />
+
+                    </helix:HelixViewport3D>
+
+                    <CheckBox x:Name="checkBoxEnableHints"
+                              Content="Hints"
+                              HorizontalAlignment="Left"
+                              Margin="10,0,0,0"
+                              VerticalAlignment="Top" />
+
+                    <!--Sensor Chart-->
+                    <lvc:CartesianChart Name="sensorAxisData"
+                                        Margin="0,236,10,0" />
+
+                    <materialDesign:Snackbar x:Name="SnackbarSeven"
+                                             MessageQueue="{materialDesign:MessageQueue}" 
+                                             Message="Loading 3D Object"/>
+
+                </Grid>
+
+            </materialDesign:Card>
+
+        </materialDesign:TransitioningContent>
+    </Grid>
+</UserControl>
