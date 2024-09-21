@@ -12,6 +12,7 @@
 
     <UserControl.Resources>
         <ResourceDictionary>
+            <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
             <ResourceDictionary.MergedDictionaries>
                 <materialDesign:BundledTheme BaseTheme="Light"
                                              PrimaryColor="DeepPurple"
@@ -20,6 +21,8 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign2.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+
+
     </UserControl.Resources>
     
     <Grid>
@@ -47,8 +50,23 @@
                     <CheckBox x:Name="checkBoxEnableHints"
                               Content="Hints"
                               HorizontalAlignment="Left"
-                              Margin="10,0,0,0"
+                              Margin="10,10,0,0"
                               VerticalAlignment="Top" />
+
+
+                    <TextBlock TextWrapping="WrapWithOverflow"
+                               Margin="10,37,191,218"
+                               Foreground="DarkBlue"
+                               Visibility="{Binding ElementName=checkBoxEnableHints,
+                                                    Path=IsChecked,
+                                                    Converter={StaticResource BoolToVisibilityConverter}}">
+                        - Holding right mouse: orbit camera. <LineBreak />
+                        - Middle mouse: moves the 3D object. <LineBreak />
+                        - Wheel mouse: adjusts the object zoom. <LineBreak /> <LineBreak />
+                        Note: UCS is relative to the 'camera' instead from '3D object' rotation.
+                        
+                    </TextBlock>
+
 
                     <!--Sensor Chart-->
                     <lvc:CartesianChart Name="sensorAxisData"
