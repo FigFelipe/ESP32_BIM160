@@ -40,7 +40,7 @@ namespace ESP32_BIM160.Views
 
             //Path to the model file
             //private const string MODEL_PATH = "C:\\Users\\Felipe\\Documents\\Dev\\UDT\\Acelerometro\\RotationCubeExample\\RotationCubeExample\\adxl345.obj";
-            const string MODEL_PATH = "C:\\Users\\Felipe\\Documents\\Dev\\UDT\\Acelerometro\\RotationCubeExample\\RotationCubeExample\\Models\\GY91\\gy_91.obj";
+            const string MODEL_PATH = "C:\\Users\\Felipe\\Documents\\Dev\\UDT\\Acelerometro\\ESP32_BIM160\\Models\\GY91\\gy_91.obj";
 
             // Instanciando um novo objeto 'device3D' do tipo 'ModelVisual3D'
             ModelVisual3D device3D = new ModelVisual3D();

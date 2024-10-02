@@ -57,6 +57,7 @@
                     <TextBlock TextWrapping="WrapWithOverflow"
                                Margin="10,37,191,218"
                                Foreground="DarkBlue"
+                               Background="White"
                                Visibility="{Binding ElementName=checkBoxEnableHints,
                                                     Path=IsChecked,
                                                     Converter={StaticResource BoolToVisibilityConverter}}">
